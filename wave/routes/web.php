@@ -10,6 +10,8 @@ Route::get('@{username}', '\Wave\Http\Controllers\ProfileController@index')->nam
 // Documentation routes
 Route::view('docs/{page?}', 'docs::index')->where('page', '(.*)');
 
+Route::get('rewriter', '\Wave\Http\Controllers\rewriterController@rewriter');
+
 // Additional Auth Routes
 Route::get('logout', '\Wave\Http\Controllers\Auth\LoginController@logout')->name('wave.logout');
 Route::get('user/verify/{verification_code}', '\Wave\Http\Controllers\Auth\RegisterController@verify')->name('verify');
