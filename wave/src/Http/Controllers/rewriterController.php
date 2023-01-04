@@ -11,19 +11,23 @@ class RewriterController extends Controller{
     public function rewriter(Request $data){
 
         $client = new \GuzzleHttp\Client();
+        $data   = [
+            "tool"=>"rewriter",
+                "language"=>$data->lang,
+                "tone"=>$data->mode,
+                "creativity"=>0.8,
+                "output_no"=>1,
+                "text"=> $data->text
+          ];
 
+    	$response = $client->request('POST', 'https://tinq.ai/api/v2/assistant', [
+            'body' => json_encode($data),
 
-    	$response = $client->request('POST', 'https://tinq.ai/api/v1/rewrite', [
-            'form_params' => [
-              'text' => $data->text,
-              'mode' => $data->mode,
-              'lang' => $data->lang
-            ],
             'headers' => [
-              'accept' => 'application/json',
-              'authorization' => 'Bearer key-d73c6023-08c3-4b7f-9e2b-d0b733e95af4-6387a5e53d1cb',
-              'content-type' => 'application/x-www-form-urlencoded',
-            ],
+                'accept' => 'application/json',
+                'authorization' => 'Bearer 39|FjxoBy6M3Qc9VMzdtIUAGPOSeXqK87Fd3BAMvUBn',
+                'content-type' => 'application/json',
+              ],
           ]);
           
           return $response->getBody()->getContents();
